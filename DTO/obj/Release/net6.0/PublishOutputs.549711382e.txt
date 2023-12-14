@@ -1,0 +1,3 @@
+C:\Users\Inovi\Desktop\InoviDataTransferObject\InoviDataTransferObject.dll
+C:\Users\Inovi\Desktop\InoviDataTransferObject\InoviDataTransferObject.deps.json
+C:\Users\Inovi\Desktop\InoviDataTransferObject\InoviDataTransferObject.pdb

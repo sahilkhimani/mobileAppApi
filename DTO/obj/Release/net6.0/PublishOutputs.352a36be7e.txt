@@ -1,0 +1,3 @@
+C:\Users\Inovi\Downloads\InoviSolution\Test\Test\DTO\bin\Release\net6.0\publish\InoviDataTransferObject\InoviDataTransferObject.dll
+C:\Users\Inovi\Downloads\InoviSolution\Test\Test\DTO\bin\Release\net6.0\publish\InoviDataTransferObject\InoviDataTransferObject.deps.json
+C:\Users\Inovi\Downloads\InoviSolution\Test\Test\DTO\bin\Release\net6.0\publish\InoviDataTransferObject\InoviDataTransferObject.pdb

@@ -1,0 +1,14 @@
+C:\Users\user\source\repos\Test\DAL\bin\Debug\net6.0\InoviDAL.deps.json
+C:\Users\user\source\repos\Test\DAL\bin\Debug\net6.0\InoviDAL.runtimeconfig.json
+C:\Users\user\source\repos\Test\DAL\bin\Debug\net6.0\InoviDAL.dll
+C:\Users\user\source\repos\Test\DAL\bin\Debug\net6.0\InoviDAL.pdb
+C:\Users\user\source\repos\Test\DAL\obj\Debug\net6.0\InoviDAL.csproj.AssemblyReference.cache
+C:\Users\user\source\repos\Test\DAL\obj\Debug\net6.0\InoviDAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\source\repos\Test\DAL\obj\Debug\net6.0\InoviDAL.AssemblyInfoInputs.cache
+C:\Users\user\source\repos\Test\DAL\obj\Debug\net6.0\InoviDAL.AssemblyInfo.cs
+C:\Users\user\source\repos\Test\DAL\obj\Debug\net6.0\InoviDAL.csproj.CoreCompileInputs.cache
+C:\Users\user\source\repos\Test\DAL\obj\Debug\net6.0\InoviDAL.dll
+C:\Users\user\source\repos\Test\DAL\obj\Debug\net6.0\refint\InoviDAL.dll
+C:\Users\user\source\repos\Test\DAL\obj\Debug\net6.0\InoviDAL.pdb
+C:\Users\user\source\repos\Test\DAL\obj\Debug\net6.0\InoviDAL.genruntimeconfig.cache
+C:\Users\user\source\repos\Test\DAL\obj\Debug\net6.0\ref\InoviDAL.dll
