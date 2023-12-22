@@ -28,7 +28,8 @@ namespace InoviDataAccessLayer.EntityModel
         {
             if (!optionsBuilder.IsConfigured)
             {
-
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("Server=DESKTOP-URSATJE;Database=QueryPro;Trusted_Connection=True;");
             }
         }
 
@@ -42,11 +43,15 @@ namespace InoviDataAccessLayer.EntityModel
 
                 entity.Property(e => e.AttachmentLinkId).HasColumnName("attachment_link_id");
 
+                entity.Property(e => e.AttachmentLink).HasColumnName("attachment_link");
+
                 entity.Property(e => e.CreatedById).HasColumnName("created_by_id");
 
                 entity.Property(e => e.CreatedOn)
                     .HasColumnType("datetime")
                     .HasColumnName("created_on");
+
+                entity.Property(e => e.Filename).HasColumnName("filename");
 
                 entity.Property(e => e.IsActive).HasColumnName("is_active");
 
@@ -57,11 +62,6 @@ namespace InoviDataAccessLayer.EntityModel
                     .HasColumnName("modified_on");
 
                 entity.Property(e => e.Path).HasColumnName("path");
-
-                entity.HasOne(d => d.PathNavigation)
-                    .WithMany(p => p.TblAttachments)
-                    .HasForeignKey(d => d.Path)
-                    .HasConstraintName("FK_tblAttachment_tblQuery");
             });
 
             modelBuilder.Entity<TblQuery>(entity =>
@@ -133,6 +133,16 @@ namespace InoviDataAccessLayer.EntityModel
                     .HasDefaultValueSql("((1))");
 
                 entity.Property(e => e.QueryId).HasColumnName("query_id");
+
+                entity.HasOne(d => d.AttachmentLink)
+                    .WithMany(p => p.TblQueryAttachments)
+                    .HasForeignKey(d => d.AttachmentLinkId)
+                    .HasConstraintName("FK_tblQueryAttachment_tblAttachment");
+
+                entity.HasOne(d => d.Query)
+                    .WithMany(p => p.TblQueryAttachments)
+                    .HasForeignKey(d => d.QueryId)
+                    .HasConstraintName("FK_tblQueryAttachment_tblQuery");
             });
 
             modelBuilder.Entity<TblQueryStatus>(entity =>

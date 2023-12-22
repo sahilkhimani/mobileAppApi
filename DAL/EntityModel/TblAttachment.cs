@@ -5,14 +5,21 @@ namespace InoviDataAccessLayer.EntityModel
 {
     public partial class TblAttachment
     {
+        public TblAttachment()
+        {
+            TblQueryAttachments = new HashSet<TblQueryAttachment>();
+        }
+
         public int AttachmentLinkId { get; set; }
-        public int? Path { get; set; }
+        public string? Path { get; set; }
+        public string? AttachmentLink { get; set; }
+        public string? Filename { get; set; }
         public bool? IsActive { get; set; }
         public DateTime? CreatedOn { get; set; }
         public int? CreatedById { get; set; }
         public DateTime? ModifiedOn { get; set; }
         public int? ModifiedById { get; set; }
 
-        public virtual TblQuery? PathNavigation { get; set; }
+        public virtual ICollection<TblQueryAttachment> TblQueryAttachments { get; set; }
     }
 }

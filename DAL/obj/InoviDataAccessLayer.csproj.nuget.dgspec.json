@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\AppAPI\\DAL\\InoviDataAccessLayer.csproj": {}
+    "C:\\Users\\Inovi\\Downloads\\InoviMobileApp\\DAL\\InoviDataAccessLayer.csproj": {}
   },
   "projects": {
-    "D:\\AppAPI\\DAL\\InoviDataAccessLayer.csproj": {
+    "C:\\Users\\Inovi\\Downloads\\InoviMobileApp\\DAL\\InoviDataAccessLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\AppAPI\\DAL\\InoviDataAccessLayer.csproj",
+        "projectUniqueName": "C:\\Users\\Inovi\\Downloads\\InoviMobileApp\\DAL\\InoviDataAccessLayer.csproj",
         "projectName": "InoviDataAccessLayer",
-        "projectPath": "D:\\AppAPI\\DAL\\InoviDataAccessLayer.csproj",
+        "projectPath": "C:\\Users\\Inovi\\Downloads\\InoviMobileApp\\DAL\\InoviDataAccessLayer.csproj",
         "packagesPath": "C:\\Users\\Inovi\\.nuget\\packages\\",
-        "outputPath": "D:\\AppAPI\\DAL\\obj\\",
+        "outputPath": "C:\\Users\\Inovi\\Downloads\\InoviMobileApp\\DAL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

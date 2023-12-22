@@ -7,7 +7,7 @@ namespace InoviDataAccessLayer.EntityModel
     {
         public TblQuery()
         {
-            TblAttachments = new HashSet<TblAttachment>();
+            TblQueryAttachments = new HashSet<TblQueryAttachment>();
             TblQueryStatuses = new HashSet<TblQueryStatus>();
         }
 
@@ -26,7 +26,7 @@ namespace InoviDataAccessLayer.EntityModel
         public int? RemarksBy { get; set; }
 
         public virtual TblUser? User { get; set; }
-        public virtual ICollection<TblAttachment> TblAttachments { get; set; }
+        public virtual ICollection<TblQueryAttachment> TblQueryAttachments { get; set; }
         public virtual ICollection<TblQueryStatus> TblQueryStatuses { get; set; }
     }
 }

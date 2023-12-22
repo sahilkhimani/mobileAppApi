@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "X6kSRwPH/Wcvz6atGNXONFlIpWkcJ6jZZp38uE3scr5vPeNac6z9XOJQUXaN3i+VTl1mKDsE5pNgupn2vNzBVg==",
+  "dgSpecHash": "SdMCx5bSoHRKuTXQ46XVyuGjKemWu8DkAK70Kf3kQ4ALB5ODQnP2UTl72ZtWJDSWexYxKrwgqEf97jcEC6BGIQ==",
   "success": true,
-  "projectFilePath": "D:\\AppAPI\\DTO\\InoviDataTransferObject.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\Inovi\\Downloads\\InoviMobileApp\\DTO\\InoviDataTransferObject.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Inovi\\.nuget\\packages\\microsoft.aspnetcore.http.features\\5.0.17\\microsoft.aspnetcore.http.features.5.0.17.nupkg.sha512",
+    "C:\\Users\\Inovi\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.1\\microsoft.extensions.primitives.5.0.1.nupkg.sha512",
+    "C:\\Users\\Inovi\\.nuget\\packages\\system.io.pipelines\\5.0.2\\system.io.pipelines.5.0.2.nupkg.sha512"
+  ],
   "logs": []
 }

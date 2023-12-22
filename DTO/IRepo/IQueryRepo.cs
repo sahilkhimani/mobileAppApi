@@ -9,8 +9,9 @@ namespace InoviDataTransferObject.IRepo
 {
     public interface IQueryRepo
     {
-        Task<List<GetQueryDTO>> GetQueryList();
-        void AddQuery(AddQueryDTO req);
-        Task<List<AttachmentLinkList>> UploadImage();
+        Task<List<GetQueryDTO>> GetQueryList(GetUserIDAndRoleID req);
+        Task<bool> AddQuery(AddQueryDTO req);
+        Task<bool> UpdateQuery(UpdateStatus req);
+        Task <AttachmentLinkList> UploadImage(AttachmentLinkList req);
     }
 }

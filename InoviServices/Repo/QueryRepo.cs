@@ -1,7 +1,12 @@
 ﻿using InoviDataAccessLayer.EntityModel;
 using InoviDataTransferObject.DTO;
 using InoviDataTransferObject.IRepo;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+using System;
+
+
 //using static System.Net.Mime.MediaTypeNames;
 using System.Net.Http;
 
@@ -17,21 +22,37 @@ namespace InoviServices.Repo
             _context = context;
         }
 
-        public void AddQuery(AddQueryDTO req)
+        public async Task<bool> AddQuery(AddQueryDTO req)
         {
             try
             {
                 TblQuery tblreq = new TblQuery
                 {
+                    Title = req.Title,
                     Description = req.Description,
+                    CurrentStatus = EStatus.Pending.ToString(),
+                    CreatedBy = req.UserID,
+                    CreatedOn = DateTime.Now.ToString("dd/MM/yyyy - hh:mm:ss"),
+                    UserId = req.UserID,
 
-                    //TblAttachments = new TblAttachment
-                    //{
-                    //    AttachmentLinkId = req.AttachmentLinkId
-                    //}
+                    TblQueryAttachments = req.AttachmentIds.Select(s => new TblQueryAttachment
+                    {
+                        AttachmentLinkId = s.AttachmentLinkId
+                    }).ToList()
                 };
-                _context.TblQueries.Add(tblreq);
+
+                 var result =_context.TblQueries.Add(tblreq).Entity;
                 _context.SaveChanges();
+                _context.TblQueryStatuses.Add(new TblQueryStatus
+                {
+                    QueryId = result.QueryId,
+                    StatusId = (int)EStatus.Pending,
+                    IsActive = true,
+                    CreatedBy = req.UserID,
+                    CreatedOn = DateTime.Now
+                });
+                _context.SaveChanges();
+                return true;
             }
             catch (Exception ex)
             {
@@ -39,13 +60,110 @@ namespace InoviServices.Repo
             }
         }
 
-        public async Task<List<GetQueryDTO>> GetQueryList()
+        public async Task<List<GetQueryDTO>> GetQueryList(GetUserIDAndRoleID req)
         {
             try
             {
-                return await _context.TblQueries
-                    .Where(s => s.IsActive == true)
-                    .Select(s => new GetQueryDTO { QueryId = s.QueryId, Title = s.Title, Description = s.Description ,CurrentStatus = s.CurrentStatus}).ToListAsync();
+                List<GetQueryDTO> queryResults;
+
+                if (req.RoleID == 3)
+                {
+                    var query = await _context.TblQueries
+                        .Where(s => s.IsActive == true && s.UserId == req.UserID)
+                        .OrderByDescending(x => x.QueryId)
+                        .ToListAsync();
+
+                    queryResults = query.Select(s => new GetQueryDTO
+                    {
+                        QueryId = s.QueryId,
+                        Title = s.Title,
+                        Description = s.Description,
+                        CurrentStatus = s.CurrentStatus,
+                        AttachmentPaths = _context.TblQueries.Include(x => x.TblQueryAttachments)
+                            .Where(x => x.IsActive == true && x.UserId == req.UserID)
+                            .Select(x => x.TblQueryAttachments
+                                .Select(qa => qa.AttachmentLink.Path)
+                                .ToList()).FirstOrDefault()
+                    }).OrderByDescending(x=>x.QueryId).ToList();
+                }
+                else
+                {
+                    var query = await _context.TblQueries
+                        .Where(s => s.IsActive == true)
+                        .OrderByDescending(x => x.QueryId)
+                        .ToListAsync();
+
+                    queryResults = query.Select(s => new GetQueryDTO
+                    {
+                        QueryId = s.QueryId,
+                        Title = s.Title,
+                        Description = s.Description,
+                        CurrentStatus = s.CurrentStatus,
+                        AttachmentPaths = _context.TblQueryAttachments
+                            .Where(qa => qa.QueryId == s.QueryId)
+                            .Select(qa => qa.AttachmentLink.Path)
+                            .ToList()
+                    }).OrderByDescending(x => x.QueryId).ToList();
+                }
+
+                return queryResults;
+            }
+            catch (Exception ex)
+            {
+                // Log or handle the exception appropriately
+                throw;
+            }
+        }
+
+
+        public async Task<bool> UpdateQuery(UpdateStatus req)
+        {
+            try
+            {
+                var query = _context.TblQueries.Where(x => x.QueryId == req.QueryID).FirstOrDefault();
+                query.CurrentStatus = req.Status;
+                query.ModifiedBy = req.UserID;
+                query.ModifiedOn = DateTime.Now;
+                _context.TblQueries.Update(query);
+                _context.TblQueryStatuses.Add(new TblQueryStatus { 
+                    QueryId = req.QueryID,
+                    StatusId= (int)req.StatusID,
+                    IsActive = true,
+                    CreatedBy = req.UserID,
+                    CreatedOn = DateTime.Now
+                });
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return false;
+        }
+
+        public async Task<AttachmentLinkList> UploadImage(AttachmentLinkList req)
+        {
+            try
+            {
+                var isExist = _context.TblAttachments.Where(x => x.AttachmentLinkId == req.AttachmentLinkId).FirstOrDefault();
+                if (isExist != null)
+                {
+                    return null;
+                }
+                else
+                {
+                    TblAttachment tblReq = new TblAttachment
+                    {
+                        Path = req.Path,
+                        Filename = req.FileName,
+                        AttachmentLink = req.AttachmentLink
+                    };
+                    tblReq = _context.TblAttachments.Add(tblReq).Entity;
+                    _context.SaveChanges();
+                    req.AttachmentLinkId = tblReq.AttachmentLinkId;
+                    return req;
+                }
             }
             catch (Exception ex)
             {
@@ -53,10 +171,7 @@ namespace InoviServices.Repo
             }
         }
 
-        public Task<List<AttachmentLinkList>> UploadImage()
-        {
-            throw new NotImplementedException();
-        }
+
 
         //public static bool SaveImage( string ImgStr, string ImgName)
         //{

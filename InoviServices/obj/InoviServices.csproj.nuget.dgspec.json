@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\AppAPI\\InoviServices\\InoviServices.csproj": {}
+    "C:\\Users\\Inovi\\Downloads\\InoviMobileApp\\InoviServices\\InoviServices.csproj": {}
   },
   "projects": {
-    "D:\\AppAPI\\DAL\\InoviDataAccessLayer.csproj": {
+    "C:\\Users\\Inovi\\Downloads\\InoviMobileApp\\DAL\\InoviDataAccessLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\AppAPI\\DAL\\InoviDataAccessLayer.csproj",
+        "projectUniqueName": "C:\\Users\\Inovi\\Downloads\\InoviMobileApp\\DAL\\InoviDataAccessLayer.csproj",
         "projectName": "InoviDataAccessLayer",
-        "projectPath": "D:\\AppAPI\\DAL\\InoviDataAccessLayer.csproj",
+        "projectPath": "C:\\Users\\Inovi\\Downloads\\InoviMobileApp\\DAL\\InoviDataAccessLayer.csproj",
         "packagesPath": "C:\\Users\\Inovi\\.nuget\\packages\\",
-        "outputPath": "D:\\AppAPI\\DAL\\obj\\",
+        "outputPath": "C:\\Users\\Inovi\\Downloads\\InoviMobileApp\\DAL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -82,14 +82,14 @@
         }
       }
     },
-    "D:\\AppAPI\\DTO\\InoviDataTransferObject.csproj": {
+    "C:\\Users\\Inovi\\Downloads\\InoviMobileApp\\DTO\\InoviDataTransferObject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\AppAPI\\DTO\\InoviDataTransferObject.csproj",
+        "projectUniqueName": "C:\\Users\\Inovi\\Downloads\\InoviMobileApp\\DTO\\InoviDataTransferObject.csproj",
         "projectName": "InoviDataTransferObject",
-        "projectPath": "D:\\AppAPI\\DTO\\InoviDataTransferObject.csproj",
+        "projectPath": "C:\\Users\\Inovi\\Downloads\\InoviMobileApp\\DTO\\InoviDataTransferObject.csproj",
         "packagesPath": "C:\\Users\\Inovi\\.nuget\\packages\\",
-        "outputPath": "D:\\AppAPI\\DTO\\obj\\",
+        "outputPath": "C:\\Users\\Inovi\\Downloads\\InoviMobileApp\\DTO\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -122,6 +122,12 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Http.Features": {
+              "target": "Package",
+              "version": "[5.0.17, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -142,14 +148,14 @@
         }
       }
     },
-    "D:\\AppAPI\\InoviServices\\InoviServices.csproj": {
+    "C:\\Users\\Inovi\\Downloads\\InoviMobileApp\\InoviServices\\InoviServices.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\AppAPI\\InoviServices\\InoviServices.csproj",
+        "projectUniqueName": "C:\\Users\\Inovi\\Downloads\\InoviMobileApp\\InoviServices\\InoviServices.csproj",
         "projectName": "InoviServices",
-        "projectPath": "D:\\AppAPI\\InoviServices\\InoviServices.csproj",
+        "projectPath": "C:\\Users\\Inovi\\Downloads\\InoviMobileApp\\InoviServices\\InoviServices.csproj",
         "packagesPath": "C:\\Users\\Inovi\\.nuget\\packages\\",
-        "outputPath": "D:\\AppAPI\\InoviServices\\obj\\",
+        "outputPath": "C:\\Users\\Inovi\\Downloads\\InoviMobileApp\\InoviServices\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -171,11 +177,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\AppAPI\\DAL\\InoviDataAccessLayer.csproj": {
-                "projectPath": "D:\\AppAPI\\DAL\\InoviDataAccessLayer.csproj"
+              "C:\\Users\\Inovi\\Downloads\\InoviMobileApp\\DAL\\InoviDataAccessLayer.csproj": {
+                "projectPath": "C:\\Users\\Inovi\\Downloads\\InoviMobileApp\\DAL\\InoviDataAccessLayer.csproj"
               },
-              "D:\\AppAPI\\DTO\\InoviDataTransferObject.csproj": {
-                "projectPath": "D:\\AppAPI\\DTO\\InoviDataTransferObject.csproj"
+              "C:\\Users\\Inovi\\Downloads\\InoviMobileApp\\DTO\\InoviDataTransferObject.csproj": {
+                "projectPath": "C:\\Users\\Inovi\\Downloads\\InoviMobileApp\\DTO\\InoviDataTransferObject.csproj"
               }
             }
           }
@@ -189,6 +195,16 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "BCrypt.Net-Next": {
+              "target": "Package",
+              "version": "[4.0.3, )"
+            },
+            "Microsoft.AspNetCore.Http.Features": {
+              "target": "Package",
+              "version": "[5.0.17, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

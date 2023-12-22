@@ -2,12 +2,7 @@
 using DTO.Interface;
 using InoviDataAccessLayer.EntityModel;
 using InoviDataTransferObject.DTO;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
+using Microsoft.EntityFrameworkCore;
 
 namespace InoviServices.Repo
 {
@@ -21,7 +16,6 @@ namespace InoviServices.Repo
             _context = context;
         }
 
-
         public async Task<bool> SignupUser(SignupDTO req)
         {
             try
@@ -33,13 +27,19 @@ namespace InoviServices.Repo
                 }
                 else
                 {
+                    string password = req.UserPassword;
+                    string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
+
+
                     TblUser tblReq = new TblUser
                     {
                         Name = req.Name,
                         Username = req.Username,
-                        Password = req.UserPassword,
-                        EmailAddress = req.UserEmail
-
+                        Password = hashedPassword,
+                        EmailAddress = req.UserEmail,
+                        UserRoleId = 3,
+                        IsActive = true,
+                        CreatedOn = DateTime.Now
                     };
                     _context.TblUsers.Add(tblReq);
                     _context.SaveChanges();
@@ -51,32 +51,41 @@ namespace InoviServices.Repo
                 throw ex;
             }
         }
-        public async Task<bool> LoginUser(LoginDTO req)
+        public async Task<JWT> LoginUser(LoginDTO req)
         {
             try
             {
                 var isExist = _context.TblUsers.Where(x => x.EmailAddress == req.UserEmail).FirstOrDefault();
                 if (isExist != null)
                 {
-                    if (isExist.Password == req.UserPassword)
+                    string storedHashedPassword = isExist.Password;
+
+                    if (BCrypt.Net.BCrypt.Verify(req.UserPassword, storedHashedPassword))
                     {
                         if (isExist.UserRoleId != null && isExist.UserRoleId != 0)
                         {
-                            return true;
+                            var result = new JWT
+                            {
+                                Email = isExist.EmailAddress,
+                                Name = isExist.Name,
+                                UserID = isExist.UserId.ToString(),
+                                RoleID = isExist.UserRoleId.ToString()
+                            };
+                            return result;
                         }
                         else
                         {
-                            return false;
+                            return null;
                         }
                     }
                     else
                     {
-                        return false;
+                        return null;
                     }
                 }
                 else
                 {
-                    return false;
+                    return null;
                 }
             }
             catch (Exception ex)
@@ -147,7 +156,54 @@ namespace InoviServices.Repo
             }
         }
 
+        public async Task<GetUserDTO> GetUserInfo(int UserID)
+        {
+            try
+            {
+                return await _context.TblUsers
+                .Where(s => s.UserId == UserID)
+                .Select(
+                    s => new GetUserDTO { 
+                        UserID = s.UserId, 
+                        RoleID = s.UserRoleId, 
+                        Name = s.Name, 
+                        Email = s.EmailAddress })
+                .FirstOrDefaultAsync();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
+        //public Task<ProfilePicDTO> UploadImage(ProfilePicDTO req)
+        //{
+        //    try
+        //    {
+        //        var isExist = _context.TblAttachments.Where(x => x.AttachmentLinkId == req.AttachmentLinkId).FirstOrDefault();
+        //        if (isExist != null)
+        //        {
+        //            return null;
+        //        }
+        //        else
+        //        {
+        //            TblAttachment tblReq = new TblAttachment
+        //            {
+        //                Path = req.Path,
+        //                Filename = req.FileName,
+        //                AttachmentLink = req.AttachmentLink
+        //            };
+        //            tblReq = _context.TblAttachments.Add(tblReq).Entity;
+        //            _context.SaveChanges();
+        //            req.AttachmentLinkId = tblReq.AttachmentLinkId;
+        //            return req;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
     }
 
 

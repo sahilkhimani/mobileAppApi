@@ -7,13 +7,15 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using InoviWebApi.Helper;
 using InoviDataTransferObject.DTO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace InoviApi.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
+
+    [Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
     public class UserController : ControllerBase
     {
         private IRepositoryWrapper _reposWrapper;
@@ -26,20 +28,21 @@ namespace InoviApi.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> SignupUser([FromBody] SignupDTO req)
         {
             try
             {
                 if (req == null || string.IsNullOrWhiteSpace(req.UserEmail) || string.IsNullOrWhiteSpace(req.UserPassword) || string.IsNullOrWhiteSpace(req.Name) || string.IsNullOrWhiteSpace(req.Username))
                 {
-                    return StatusCode(StatusCodes.Status204NoContent, "Values cannot be Null!");
+                    return StatusCode(StatusCodes.Status204NoContent, "Values Cannot Be Null!");
                 }
                 else
                 {
                     var result = await _reposWrapper.UserRepo.SignupUser(req);
                     if (result == false)
                     {
-                        return StatusCode(StatusCodes.Status208AlreadyReported, "User with the same email already exist!");
+                        return StatusCode(StatusCodes.Status208AlreadyReported, "User With The Same Email Already Exist!");
                     }
                     else
                     {
@@ -55,25 +58,32 @@ namespace InoviApi.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> LoginUser([FromBody] LoginDTO req)
         {
+            JWT jwt = new JWT();
             try
             {
                 if (req == null || string.IsNullOrWhiteSpace(req.UserEmail) || string.IsNullOrWhiteSpace(req.UserPassword))
                 {
-                    return StatusCode(StatusCodes.Status204NoContent, "Values cannot be Null!");
+                    return StatusCode(StatusCodes.Status204NoContent, "Values Cannot Be Null!");
                 }
                 else
                 {
                     var result = await _reposWrapper.UserRepo.LoginUser(req);
-                    if (result == false)
+                    if (result == null)
                     {
                         return StatusCode(StatusCodes.Status401Unauthorized, "User Not Authenticate!");
                     }
                     else
                     {
-                        string Token = GenerateJWT(req);
-                        return StatusCode(StatusCodes.Status200OK, Token);
+                        jwt.Email = result.Email;
+                        jwt.Name = result.Name;
+                        jwt.UserID = result.UserID.ToString();
+                        jwt.RoleID = result.RoleID.ToString();
+
+                        jwt.Token = GenerateJWT(jwt);
+                        return StatusCode(StatusCodes.Status200OK, jwt.Token);
                     }
                 }
             }
@@ -85,20 +95,21 @@ namespace InoviApi.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> SendOTP([FromBody] SendOTPDTO req)
         {
             try
             {
                 if (string.IsNullOrWhiteSpace(req.UserEmail))
                 {
-                    return StatusCode(StatusCodes.Status204NoContent, "Value cannot be Null!");
+                    return StatusCode(StatusCodes.Status204NoContent, "Values Cannot Be Null!");
                 }
                 else
                 {
                     var result = await _reposWrapper.UserRepo.SendOTP(req);
                     if (result == null)
                     {
-                        return StatusCode(StatusCodes.Status404NotFound, "Email not Exist!");
+                        return StatusCode(StatusCodes.Status404NotFound, "Email Not Exist!");
                     }
                     else
                     {
@@ -123,9 +134,9 @@ namespace InoviApi.Controllers
                         smtp.Credentials = new NetworkCredential(otp.From, otp.Password);
                         await smtp.SendMailAsync(mailMessage);
 
-                        //HttpContext.Session.SetString("code", otp.Otp);
+                        HttpContext.Session.SetString("OTP", otp.Otp);
 
-                        return StatusCode(StatusCodes.Status200OK, "OTP Send Succesfully '" + otp.Otp);
+                        return StatusCode(StatusCodes.Status200OK, "OTP Send Successfully! '" + otp.Otp);
                     }
                 }
 
@@ -137,26 +148,32 @@ namespace InoviApi.Controllers
         }
 
         [HttpPost]
+        [Obsolete]
         public async Task<ActionResult> ValidateOTP([FromBody] ValidateOTPDTO req)
         {
             try
             {
-                string val = HttpContext.Session.GetString("code");
-                var result = await _reposWrapper.UserRepo.ValidateOTP(req);
-                if (result == false)
+                if (req == null || string.IsNullOrWhiteSpace(req.UserEmail) || string.IsNullOrWhiteSpace(req.Otp))
                 {
-                    return StatusCode(StatusCodes.Status404NotFound, "User Not Found!");
+                    return StatusCode(StatusCodes.Status204NoContent, "Values Cannot Be Null!");
                 }
-
                 else
                 {
-                    if (req.Otp == val)
+                    var result = await _reposWrapper.UserRepo.ValidateOTP(req);
+                    if (result == false)
                     {
-                        return StatusCode(StatusCodes.Status200OK, "OTP Matched!");
+                        return StatusCode(StatusCodes.Status404NotFound, "User Not Found!");
                     }
                     else
                     {
-                        return StatusCode(StatusCodes.Status404NotFound, "OTP Not Matched!");
+                        if (req.Otp == HttpContext.Session.GetString("OTP"))
+                        {
+                            return StatusCode(StatusCodes.Status200OK, "OTP Matched!");
+                        }
+                        else
+                        {
+                            return StatusCode(StatusCodes.Status404NotFound, "OTP Not Matched!");
+                        }
                     }
                 }
             }
@@ -167,31 +184,39 @@ namespace InoviApi.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> UpdateUserPassword([FromBody] UpdateUserPasswordDTO req)
         {
             try
             {
                 if (req == null || string.IsNullOrWhiteSpace(req.UserEmail) || string.IsNullOrWhiteSpace(req.Otp) || string.IsNullOrWhiteSpace(req.UserPassword) || string.IsNullOrWhiteSpace(req.UserConfirmPassword))
                 {
-                    return StatusCode(StatusCodes.Status204NoContent, "Values cannot be Null!");
+                    return StatusCode(StatusCodes.Status204NoContent, "Values Cannot Be Null!");
                 }
                 else
                 {
-                    if (req.UserPassword == req.UserConfirmPassword)
+                    if (req.Otp == HttpContext.Session.GetString("OTP"))
                     {
-                        var result = await _reposWrapper.UserRepo.UpdateUserPassword(req);
-                        if (result == false)
+                        if (req.UserPassword == req.UserConfirmPassword)
                         {
-                            return StatusCode(StatusCodes.Status404NotFound, "User Not Found!");
+                            var result = await _reposWrapper.UserRepo.UpdateUserPassword(req);
+                            if (result == false)
+                            {
+                                return StatusCode(StatusCodes.Status404NotFound, "User Not Found!");
+                            }
+                            else
+                            {
+                                return StatusCode(StatusCodes.Status200OK, "Password Updated Successfully!");
+                            }
                         }
                         else
                         {
-                            return StatusCode(StatusCodes.Status200OK, "Password Updated Successfully!");
+                            return StatusCode(StatusCodes.Status404NotFound, "Password Not Matched!");
                         }
                     }
                     else
                     {
-                        return StatusCode(StatusCodes.Status404NotFound, "Password Not Matched!");
+                        return StatusCode(StatusCodes.Status404NotFound, "OTP Not Matched!");
                     }
                 }
             }
@@ -202,8 +227,32 @@ namespace InoviApi.Controllers
             }
         }
 
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> GetUserInfo()
+        {
+            try
+            {
+                int userIdClaim = Convert.ToInt32( User.FindFirst("UserID")?.Value);
 
-        private string GenerateJWT(LoginDTO req)
+                var result = await _reposWrapper.UserRepo.GetUserInfo(userIdClaim);
+                if (result == null)
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving user information.");
+                }
+                else 
+                {
+                    return StatusCode(StatusCodes.Status200OK, result);
+                }
+               
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving user information.");
+            }
+        }
+
+        private string GenerateJWT(JWT req)
         {
 
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
@@ -211,19 +260,29 @@ namespace InoviApi.Controllers
 
             var claims = new[] {
          new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-         new Claim(JwtRegisteredClaimNames.Email, req.UserEmail),
-         new Claim(JwtRegisteredClaimNames.Sid, req.UserPassword),
+         new Claim(JwtRegisteredClaimNames.Email, req.Email),
+         new Claim(JwtRegisteredClaimNames.Name, req.Name),
+         new Claim(JwtRegisteredClaimNames.Sid, req.UserID),
+         new Claim("UserID", req.UserID),
+
+         new Claim(ClaimTypes.Role,req.RoleID),
          new Claim("Date", DateTime.Now.ToString()),
          };
 
             var token = new JwtSecurityToken(_configuration["Jwt:Issuer"],
               _configuration["Jwt:Audiance"],
               claims,
-              expires: DateTime.Now.AddMinutes(2),
+              expires: DateTime.Now.AddMinutes(60),
               signingCredentials: credentials);
-            string Token = new JwtSecurityTokenHandler().WriteToken(token);
-            return Token;
+            req.Token = new JwtSecurityTokenHandler().WriteToken(token);
+            return req.Token;
         }
+        //private JwtPayload DecodeJwt(string jwtToken)
+        //{
+        //    var handler = new JwtSecurityTokenHandler();
+        //    var jsonToken = handler.ReadToken(jwtToken) as JwtSecurityToken;
 
+        //    return jsonToken?.Payload;
+        //}
     }
 }
