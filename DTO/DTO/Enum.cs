@@ -8,7 +8,7 @@ namespace InoviDataTransferObject.DTO
 {
     public enum EStatus
     {
-        Pending = 1, Accepted = 2, Rejected = 3
+        Pending = 1, Approved = 2, Rejected = 3
 
     }
 }
