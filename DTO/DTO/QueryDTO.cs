@@ -14,6 +14,8 @@ namespace InoviDataTransferObject.DTO
         public string Title { get; set; }
         public string Description { get; set; }
         public string CurrentStatus { get; set; }
+        public string Remarks { get; set; }
+
         //public string AttachmentPaths { get; set; }
         public List<string> AttachmentPaths { get; set; }
     }
@@ -22,7 +24,7 @@ namespace InoviDataTransferObject.DTO
     {
         public string Title { get; set; }
         public string Description { get; set; }
-        public List<AttachmentLinkList>? AttachmentIds { get; set; } = null;
+        public List<AttachmentLinkList> AttachmentIds { get; set; }
         public List<string> Attachments { get; set; }
         public int UserID { get; set; }
     }
@@ -33,6 +35,9 @@ namespace InoviDataTransferObject.DTO
         public string FileName { get; set; }
         public string AttachmentLink { get; set; }
         public string Path { get; set; }
+        public bool IsActive { get; } = true;
+        public int UserID { get; set; }
+
     }
    public class GetUserIDAndRoleID
     {
@@ -45,5 +50,6 @@ namespace InoviDataTransferObject.DTO
         public EStatus StatusID { get; set; }
         public string? Status { get { return StatusID.ToString(); } }
         public int UserID { get; set; }
+        public string Remarks { get; set; }
     }
 }

@@ -16,6 +16,6 @@ namespace DTO.Interface
         Task<bool> ValidateOTP(ValidateOTPDTO req);
         Task<bool> UpdateUserPassword(UpdateUserPasswordDTO req);
         Task<GetUserDTO> GetUserInfo(int UserID);
-        //Task<ProfilePicDTO> UploadImage(ProfilePicDTO req);
+        Task<ProfilePicDTO> UploadProfile(ProfilePicDTO req);
     }
 }

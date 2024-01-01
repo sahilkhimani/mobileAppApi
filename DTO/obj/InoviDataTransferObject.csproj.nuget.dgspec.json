@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Inovi\\Downloads\\InoviMobileApp\\DTO\\InoviDataTransferObject.csproj": {}
+    "D:\\AppAPI\\DTO\\InoviDataTransferObject.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Inovi\\Downloads\\InoviMobileApp\\DTO\\InoviDataTransferObject.csproj": {
+    "D:\\AppAPI\\DTO\\InoviDataTransferObject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Inovi\\Downloads\\InoviMobileApp\\DTO\\InoviDataTransferObject.csproj",
+        "projectUniqueName": "D:\\AppAPI\\DTO\\InoviDataTransferObject.csproj",
         "projectName": "InoviDataTransferObject",
-        "projectPath": "C:\\Users\\Inovi\\Downloads\\InoviMobileApp\\DTO\\InoviDataTransferObject.csproj",
+        "projectPath": "D:\\AppAPI\\DTO\\InoviDataTransferObject.csproj",
         "packagesPath": "C:\\Users\\Inovi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Inovi\\Downloads\\InoviMobileApp\\DTO\\obj\\",
+        "outputPath": "D:\\AppAPI\\DTO\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

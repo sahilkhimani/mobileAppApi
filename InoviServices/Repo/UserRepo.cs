@@ -8,7 +8,6 @@ namespace InoviServices.Repo
 {
     public class UserRepo : IUserRepo
     {
-
         private QueryProContext _context;
         ResponseDTO resp = new ResponseDTO();
         public UserRepo(QueryProContext context)
@@ -37,11 +36,15 @@ namespace InoviServices.Repo
                         Username = req.Username,
                         Password = hashedPassword,
                         EmailAddress = req.UserEmail,
-                        UserRoleId = 3,
-                        IsActive = true,
+                        UserRoleId = req.RoleID,
+                        IsActive = req.IsActive,
                         CreatedOn = DateTime.Now
                     };
-                    _context.TblUsers.Add(tblReq);
+                    var UserEntity = _context.TblUsers.Add(tblReq).Entity;
+                    _context.SaveChanges();
+
+                    tblReq.CreatedBy = UserEntity.UserId;
+                    _context.TblUsers.Update(tblReq);
                     _context.SaveChanges();
                     return true;
                 }
@@ -144,18 +147,20 @@ namespace InoviServices.Repo
                 }
                 else
                 {
-                    isExist.Password = req.UserPassword;
+                    string hashedPassword = BCrypt.Net.BCrypt.HashPassword(req.UserPassword);
+                    isExist.Password = hashedPassword;
+                    isExist.ModifiedBy = isExist.UserId;
+                    isExist.ModifiedOn = DateTime.Now;
                     _context.Update<TblUser>(isExist);
                     _context.SaveChanges();
                     return true;
-                }
+                };
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
-
         public async Task<GetUserDTO> GetUserInfo(int UserID)
         {
             try
@@ -163,12 +168,45 @@ namespace InoviServices.Repo
                 return await _context.TblUsers
                 .Where(s => s.UserId == UserID)
                 .Select(
-                    s => new GetUserDTO { 
-                        UserID = s.UserId, 
-                        RoleID = s.UserRoleId, 
-                        Name = s.Name, 
-                        Email = s.EmailAddress })
+                    s => new GetUserDTO
+                    {
+                        UserID = s.UserId,
+                        RoleID = s.UserRoleId,
+                        Name = s.Name,
+                        Email = s.EmailAddress
+                    })
                 .FirstOrDefaultAsync();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public async Task<ProfilePicDTO> UploadProfile(ProfilePicDTO req)
+        {
+            try
+            {
+                var isExist = _context.TblProfiles.Where(x => x.ProfileId == req.ProfileId).FirstOrDefault();
+                if (isExist != null)
+                {
+                    return null;
+                }
+                else
+                {
+                    TblProfile tblReq = new TblProfile
+                    {
+                        ProfilePath = req.Path,
+                        ProfileLink = req.ProfileLink,
+                        UserId = req.UserId,
+                        IsActive = req.IsActive,
+                        CreatedOn = DateTime.Now,
+                        CreatedBy = req.UserId
+                    };
+                    tblReq = _context.TblProfiles.Add(tblReq).Entity;
+                    _context.SaveChanges();
+                    req.ProfileId = tblReq.ProfileId;
+                    return req;
+                }
             }
             catch (Exception ex)
             {

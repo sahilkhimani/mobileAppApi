@@ -70,7 +70,6 @@ namespace InoviServices.Repo
                 {
                     var query = await _context.TblQueries
                         .Where(s => s.IsActive == true && s.UserId == req.UserID)
-                        .OrderByDescending(x => x.QueryId)
                         .ToListAsync();
 
                     queryResults = query.Select(s => new GetQueryDTO
@@ -79,18 +78,18 @@ namespace InoviServices.Repo
                         Title = s.Title,
                         Description = s.Description,
                         CurrentStatus = s.CurrentStatus,
+                        Remarks = s.Remarks,
                         AttachmentPaths = _context.TblQueries.Include(x => x.TblQueryAttachments)
                             .Where(x => x.IsActive == true && x.UserId == req.UserID)
                             .Select(x => x.TblQueryAttachments
                                 .Select(qa => qa.AttachmentLink.Path)
                                 .ToList()).FirstOrDefault()
-                    }).OrderByDescending(x=>x.QueryId).ToList();
+                    }).ToList();
                 }
                 else
                 {
                     var query = await _context.TblQueries
                         .Where(s => s.IsActive == true)
-                        .OrderByDescending(x => x.QueryId)
                         .ToListAsync();
 
                     queryResults = query.Select(s => new GetQueryDTO
@@ -99,11 +98,12 @@ namespace InoviServices.Repo
                         Title = s.Title,
                         Description = s.Description,
                         CurrentStatus = s.CurrentStatus,
+                        Remarks = s.Remarks,
                         AttachmentPaths = _context.TblQueryAttachments
                             .Where(qa => qa.QueryId == s.QueryId)
                             .Select(qa => qa.AttachmentLink.Path)
                             .ToList()
-                    }).OrderByDescending(x => x.QueryId).ToList();
+                    }).ToList();
                 }
 
                 return queryResults;
@@ -124,6 +124,9 @@ namespace InoviServices.Repo
                 query.CurrentStatus = req.Status;
                 query.ModifiedBy = req.UserID;
                 query.ModifiedOn = DateTime.Now;
+                query.Remarks = req.Remarks;
+                query.RemarksBy = req.UserID;
+                query.RemarksOn = DateTime.Now;
                 _context.TblQueries.Update(query);
                 _context.TblQueryStatuses.Add(new TblQueryStatus { 
                     QueryId = req.QueryID,
@@ -156,8 +159,10 @@ namespace InoviServices.Repo
                     TblAttachment tblReq = new TblAttachment
                     {
                         Path = req.Path,
-                        Filename = req.FileName,
-                        AttachmentLink = req.AttachmentLink
+                        AttachmentLink = req.AttachmentLink,
+                        IsActive = req.IsActive,
+                        CreatedOn = DateTime.Now,
+                        CreatedById = req.UserID
                     };
                     tblReq = _context.TblAttachments.Add(tblReq).Entity;
                     _context.SaveChanges();

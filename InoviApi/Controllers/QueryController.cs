@@ -1,4 +1,5 @@
 ﻿using DTO;
+using DTO.DTO;
 using InoviDataTransferObject.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -9,7 +10,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace InoviWebApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
 
     [Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
@@ -24,7 +25,7 @@ namespace InoviWebApi.Controllers
             _configuration = configuration;
         }
 
-        [HttpPost("addquery")]
+        [HttpPost]
         public async Task<IActionResult> AddQuery([FromBody] AddQueryDTO req)
         {
             try
@@ -37,7 +38,7 @@ namespace InoviWebApi.Controllers
                 {
                     req.UserID = Convert.ToInt32(User.FindFirst("UserID")?.Value);
 
-                    req.AttachmentIds = await uploadBase(req.Attachments);
+                    req.AttachmentIds = await UploadBase(req.Attachments);
 
                     var result = await _reposWrapper.QueryRepo.AddQuery(req);
                     if (result == true)
@@ -56,13 +57,13 @@ namespace InoviWebApi.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error Adding Data!");
             }
         }
-        [HttpPost("updatequery")]
+        [HttpPost]
+        [Authorize(Roles = "1,4")]
         public async Task<IActionResult> UpdateQuery([FromBody] UpdateStatus req)
         {
             try
             {
-                req.UserID =  Convert.ToInt32(User.FindFirst("UserID")?.Value);
-
+                req.UserID = Convert.ToInt32(User.FindFirst("UserID")?.Value);
                 var result = await _reposWrapper.QueryRepo.UpdateQuery(req);
                 if (result == true)
                 {
@@ -86,9 +87,7 @@ namespace InoviWebApi.Controllers
                 int userIdClaim = Convert.ToInt32(User.FindFirst("UserID")?.Value);
                 int userRoleClaim = Convert.ToInt32(User.FindFirst(ClaimTypes.Role)?.Value);
 
-
-
-                        var result = await _reposWrapper.QueryRepo.GetQueryList(new GetUserIDAndRoleID { RoleID = userRoleClaim,UserID= userIdClaim });
+                var result = await _reposWrapper.QueryRepo.GetQueryList(new GetUserIDAndRoleID { RoleID = userRoleClaim, UserID = userIdClaim });
                 if (result == null)
                 {
                     return StatusCode(StatusCodes.Status404NotFound, "Null Data!");
@@ -106,7 +105,7 @@ namespace InoviWebApi.Controllers
 
         }
         [Obsolete]
-        [HttpPost("upload")]
+        [HttpPost]
         public async Task<IActionResult> UploadImages([FromBody] List<string> base64Strings)
         {
             try
@@ -143,13 +142,13 @@ namespace InoviWebApi.Controllers
 
                         var result = await _reposWrapper.QueryRepo.UploadImage(uploadedFile);
 
-                        if (result != null) 
+                        if (result != null)
                         {
                             return StatusCode(StatusCodes.Status200OK, result);
                         }
                         else
                         {
-                         return StatusCode(StatusCodes.Status404NotFound, "Null Data!");
+                            return StatusCode(StatusCodes.Status404NotFound, "Null Data!");
                         }
                     }
                 }
@@ -162,8 +161,9 @@ namespace InoviWebApi.Controllers
             }
         }
 
-        private async Task<List<AttachmentLinkList>> uploadBase(List<string> base64Strings)
+        private async Task<List<AttachmentLinkList>> UploadBase(List<string> base64Strings)
         {
+            var userid = Convert.ToInt32(User.FindFirst("UserID")?.Value);
             List<AttachmentLinkList> lst = new List<AttachmentLinkList>();
 
             foreach (var base64String in base64Strings)
@@ -175,29 +175,71 @@ namespace InoviWebApi.Controllers
 
                     // Process each file, generate attachment link ID
                     var attachmentLink = Guid.NewGuid().ToString() + ".png";
-                    var filePath = _configuration["filepath"] +"\\"+ attachmentLink;
+                    string path = _configuration["filepath"];
+                    bool exists = System.IO.Directory.Exists(path);
 
-                    // Save the byte array to the file
-                    System.IO.File.WriteAllBytes(filePath, fileBytes);
+                    if (!exists)
+                        System.IO.Directory.CreateDirectory(path);
+                    var filePath = _configuration["filepath"] + "\\" + attachmentLink;
+
+                    using (var stream = new FileStream(filePath, FileMode.OpenOrCreate))
+                    {
+                        // Write the byte array to the file using FileStream
+                        await stream.WriteAsync(fileBytes, 0, fileBytes.Length);
+                    }
 
                     // Create model for the uploaded file
                     var uploadedFile = new AttachmentLinkList
                     {
-                        FileName = attachmentLink, // Provide the original filename here
                         AttachmentLink = attachmentLink,
-                        Path = filePath
+                        Path = filePath,
+                        UserID = userid,
                     };
-
 
                     uploadedFile = await _reposWrapper.QueryRepo.UploadImage(uploadedFile);
 
                     lst.Add(uploadedFile);
-
                 }
             }
 
             return lst;
         }
+        //private async Task<List<AttachmentLinkList>> UploadBase(List<string> base64Strings)
+        //{
+        //    List<AttachmentLinkList> lst = new List<AttachmentLinkList>();
+
+        //    foreach (var base64String in base64Strings)
+        //    {
+        //        if (!string.IsNullOrEmpty(base64String))
+        //        {
+        //            // Decode the Base64 string to byte array
+        //            byte[] fileBytes = Convert.FromBase64String(base64String);
+
+        //            // Process each file, generate attachment link ID
+        //            var attachmentLink = Guid.NewGuid().ToString() + ".png";
+        //            var filePath = _configuration["filepath"] + "\\" + attachmentLink;
+
+        //            // Save the byte array to the file
+        //            System.IO.File.WriteAllBytes(filePath, fileBytes);
+
+        //            // Create model for the uploaded file
+        //            var uploadedFile = new AttachmentLinkList
+        //            {
+        //                FileName = attachmentLink, // Provide the original filename here
+        //                AttachmentLink = attachmentLink,
+        //                Path = filePath
+        //            };
+
+
+        //            uploadedFile = await _reposWrapper.QueryRepo.UploadImage(uploadedFile);
+
+        //            lst.Add(uploadedFile);
+
+        //        }
+        //    }
+
+        //    return lst;
+        //}
 
         //public IActionResult UploadImages([FromForm] List<IFormFile> files)
         //{

@@ -17,19 +17,20 @@ namespace InoviDataAccessLayer.EntityModel
         }
 
         public virtual DbSet<TblAttachment> TblAttachments { get; set; } = null!;
+        public virtual DbSet<TblProfile> TblProfiles { get; set; } = null!;
         public virtual DbSet<TblQuery> TblQueries { get; set; } = null!;
         public virtual DbSet<TblQueryAttachment> TblQueryAttachments { get; set; } = null!;
         public virtual DbSet<TblQueryStatus> TblQueryStatuses { get; set; } = null!;
+        public virtual DbSet<TblRole> TblRoles { get; set; } = null!;
         public virtual DbSet<TblStatus> TblStatuses { get; set; } = null!;
         public virtual DbSet<TblUser> TblUsers { get; set; } = null!;
-        public virtual DbSet<TblUserRole> TblUserRoles { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=DESKTOP-URSATJE;Database=QueryPro;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=DESKTOP-VSE0EEF;Database=QueryPro;Trusted_Connection=True;");
             }
         }
 
@@ -51,8 +52,6 @@ namespace InoviDataAccessLayer.EntityModel
                     .HasColumnType("datetime")
                     .HasColumnName("created_on");
 
-                entity.Property(e => e.Filename).HasColumnName("filename");
-
                 entity.Property(e => e.IsActive).HasColumnName("is_active");
 
                 entity.Property(e => e.ModifiedById).HasColumnName("modified_by_id");
@@ -62,6 +61,40 @@ namespace InoviDataAccessLayer.EntityModel
                     .HasColumnName("modified_on");
 
                 entity.Property(e => e.Path).HasColumnName("path");
+            });
+
+            modelBuilder.Entity<TblProfile>(entity =>
+            {
+                entity.HasKey(e => e.ProfileId);
+
+                entity.ToTable("tblProfile");
+
+                entity.Property(e => e.ProfileId).HasColumnName("profile_id");
+
+                entity.Property(e => e.CreatedBy).HasColumnName("created_by");
+
+                entity.Property(e => e.CreatedOn)
+                    .HasColumnType("datetime")
+                    .HasColumnName("created_on");
+
+                entity.Property(e => e.IsActive).HasColumnName("is_active");
+
+                entity.Property(e => e.ModifiedBy).HasColumnName("modified_by");
+
+                entity.Property(e => e.ModifiedOn)
+                    .HasColumnType("datetime")
+                    .HasColumnName("modified_on");
+
+                entity.Property(e => e.ProfileLink).HasColumnName("profile_link");
+
+                entity.Property(e => e.ProfilePath).HasColumnName("profile_path");
+
+                entity.Property(e => e.UserId).HasColumnName("user_id");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.TblProfiles)
+                    .HasForeignKey(d => d.UserId)
+                    .HasConstraintName("FK_tblProfile_tblUser");
             });
 
             modelBuilder.Entity<TblQuery>(entity =>
@@ -76,10 +109,10 @@ namespace InoviDataAccessLayer.EntityModel
                 entity.Property(e => e.CreatedBy).HasColumnName("created_by");
 
                 entity.Property(e => e.CreatedOn)
-                    .HasMaxLength(10)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
                     .HasColumnName("created_on")
-                    .HasDefaultValueSql("(getdate())")
-                    .IsFixedLength();
+                    .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.CurrentStatus)
                     .HasMaxLength(50)
@@ -174,6 +207,22 @@ namespace InoviDataAccessLayer.EntityModel
                     .HasConstraintName("FK_QueryStatus_Status");
             });
 
+            modelBuilder.Entity<TblRole>(entity =>
+            {
+                entity.HasKey(e => e.UserRoleId)
+                    .HasName("PK_UserRole");
+
+                entity.ToTable("tblRole");
+
+                entity.Property(e => e.UserRoleId).HasColumnName("user_role_id");
+
+                entity.Property(e => e.IsActive).HasColumnName("is_active");
+
+                entity.Property(e => e.Role)
+                    .HasMaxLength(50)
+                    .HasColumnName("role");
+            });
+
             modelBuilder.Entity<TblStatus>(entity =>
             {
                 entity.HasKey(e => e.StatusId)
@@ -210,9 +259,7 @@ namespace InoviDataAccessLayer.EntityModel
                     .HasMaxLength(50)
                     .HasColumnName("email_address");
 
-                entity.Property(e => e.IsActive)
-                    .HasColumnName("is_active")
-                    .HasDefaultValueSql("((1))");
+                entity.Property(e => e.IsActive).HasColumnName("is_active");
 
                 entity.Property(e => e.ModifiedBy).HasColumnName("modified_by");
 
@@ -225,9 +272,7 @@ namespace InoviDataAccessLayer.EntityModel
                     .HasMaxLength(50)
                     .HasColumnName("name");
 
-                entity.Property(e => e.Password)
-                    .HasMaxLength(50)
-                    .HasColumnName("password");
+                entity.Property(e => e.Password).HasColumnName("password");
 
                 entity.Property(e => e.UserRoleId).HasColumnName("user_role_id");
 
@@ -239,22 +284,6 @@ namespace InoviDataAccessLayer.EntityModel
                     .WithMany(p => p.TblUsers)
                     .HasForeignKey(d => d.UserRoleId)
                     .HasConstraintName("FK_User_UserRole");
-            });
-
-            modelBuilder.Entity<TblUserRole>(entity =>
-            {
-                entity.HasKey(e => e.UserRoleId)
-                    .HasName("PK_UserRole");
-
-                entity.ToTable("tblUserRole");
-
-                entity.Property(e => e.UserRoleId).HasColumnName("user_role_id");
-
-                entity.Property(e => e.IsActive).HasColumnName("is_active");
-
-                entity.Property(e => e.Role)
-                    .HasMaxLength(50)
-                    .HasColumnName("role");
             });
 
             OnModelCreatingPartial(modelBuilder);

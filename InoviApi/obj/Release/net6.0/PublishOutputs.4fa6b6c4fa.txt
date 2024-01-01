@@ -5,8 +5,10 @@ D:\AppAPI\InoviApi\obj\Release\net6.0\PubTmp\Out\InoviWebApi.dll
 D:\AppAPI\InoviApi\obj\Release\net6.0\PubTmp\Out\InoviWebApi.deps.json
 D:\AppAPI\InoviApi\obj\Release\net6.0\PubTmp\Out\InoviWebApi.runtimeconfig.json
 D:\AppAPI\InoviApi\obj\Release\net6.0\PubTmp\Out\InoviWebApi.pdb
-D:\AppAPI\InoviApi\obj\Release\net6.0\PubTmp\Out\FluentAssertions.dll
+D:\AppAPI\InoviApi\obj\Release\net6.0\PubTmp\Out\BCrypt.Net-Next.dll
 D:\AppAPI\InoviApi\obj\Release\net6.0\PubTmp\Out\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\AppAPI\InoviApi\obj\Release\net6.0\PubTmp\Out\Microsoft.AspNetCore.Authorization.dll
+D:\AppAPI\InoviApi\obj\Release\net6.0\PubTmp\Out\Microsoft.AspNetCore.Metadata.dll
 D:\AppAPI\InoviApi\obj\Release\net6.0\PubTmp\Out\Microsoft.Data.SqlClient.dll
 D:\AppAPI\InoviApi\obj\Release\net6.0\PubTmp\Out\Microsoft.EntityFrameworkCore.dll
 D:\AppAPI\InoviApi\obj\Release\net6.0\PubTmp\Out\Microsoft.EntityFrameworkCore.Abstractions.dll
@@ -14,6 +16,10 @@ D:\AppAPI\InoviApi\obj\Release\net6.0\PubTmp\Out\Microsoft.EntityFrameworkCore.R
 D:\AppAPI\InoviApi\obj\Release\net6.0\PubTmp\Out\Microsoft.EntityFrameworkCore.SqlServer.dll
 D:\AppAPI\InoviApi\obj\Release\net6.0\PubTmp\Out\Microsoft.Extensions.Caching.Memory.dll
 D:\AppAPI\InoviApi\obj\Release\net6.0\PubTmp\Out\Microsoft.Extensions.DependencyInjection.dll
+D:\AppAPI\InoviApi\obj\Release\net6.0\PubTmp\Out\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\AppAPI\InoviApi\obj\Release\net6.0\PubTmp\Out\Microsoft.Extensions.Logging.Abstractions.dll
+D:\AppAPI\InoviApi\obj\Release\net6.0\PubTmp\Out\Microsoft.Extensions.Options.dll
+D:\AppAPI\InoviApi\obj\Release\net6.0\PubTmp\Out\Microsoft.Extensions.Primitives.dll
 D:\AppAPI\InoviApi\obj\Release\net6.0\PubTmp\Out\Microsoft.Identity.Client.dll
 D:\AppAPI\InoviApi\obj\Release\net6.0\PubTmp\Out\Microsoft.IdentityModel.JsonWebTokens.dll
 D:\AppAPI\InoviApi\obj\Release\net6.0\PubTmp\Out\Microsoft.IdentityModel.Logging.dll

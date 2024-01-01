@@ -189,14 +189,13 @@ namespace InoviApi.Controllers
         {
             try
             {
+
                 if (req == null || string.IsNullOrWhiteSpace(req.UserEmail) || string.IsNullOrWhiteSpace(req.Otp) || string.IsNullOrWhiteSpace(req.UserPassword) || string.IsNullOrWhiteSpace(req.UserConfirmPassword))
                 {
                     return StatusCode(StatusCodes.Status204NoContent, "Values Cannot Be Null!");
                 }
                 else
                 {
-                    if (req.Otp == HttpContext.Session.GetString("OTP"))
-                    {
                         if (req.UserPassword == req.UserConfirmPassword)
                         {
                             var result = await _reposWrapper.UserRepo.UpdateUserPassword(req);
@@ -213,11 +212,7 @@ namespace InoviApi.Controllers
                         {
                             return StatusCode(StatusCodes.Status404NotFound, "Password Not Matched!");
                         }
-                    }
-                    else
-                    {
-                        return StatusCode(StatusCodes.Status404NotFound, "OTP Not Matched!");
-                    }
+                    
                 }
             }
             catch (Exception)
@@ -250,6 +245,40 @@ namespace InoviApi.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving user information.");
             }
+        }
+        [HttpPost]
+        [Authorize]
+        public async Task<ProfilePicDTO> UploadProfile(string base64String)
+        {
+            var userid = Convert.ToInt32(User.FindFirst("UserID")?.Value);
+            if (string.IsNullOrEmpty(base64String))
+            {
+                return null;
+            }
+
+            byte[] fileBytes = Convert.FromBase64String(base64String);
+
+            var attachmentLink = Guid.NewGuid().ToString() + ".png";
+            var filePath = _configuration["filepath2"] + "\\" + attachmentLink;
+
+            using (var stream = new FileStream(filePath, FileMode.OpenOrCreate))
+            {
+                await stream.WriteAsync(fileBytes, 0, fileBytes.Length);
+            }
+
+            // Create model for the uploaded file
+            var uploadedFile = new ProfilePicDTO
+            {
+                ProfileLink = attachmentLink,
+                Path = filePath,
+                UserId = userid
+
+            };
+
+            // Upload the file and update the model
+            uploadedFile = await _reposWrapper.UserRepo.UploadProfile(uploadedFile);
+
+            return uploadedFile;
         }
 
         private string GenerateJWT(JWT req)

@@ -1,6 +1,8 @@
 C:\Users\Inovi\Desktop\InoviServices\InoviServices.dll
 C:\Users\Inovi\Desktop\InoviServices\InoviServices.deps.json
 C:\Users\Inovi\Desktop\InoviServices\InoviServices.pdb
+C:\Users\Inovi\Desktop\InoviServices\BCrypt.Net-Next.dll
+C:\Users\Inovi\Desktop\InoviServices\Microsoft.AspNetCore.Http.Features.dll
 C:\Users\Inovi\Desktop\InoviServices\Microsoft.Data.SqlClient.dll
 C:\Users\Inovi\Desktop\InoviServices\Microsoft.EntityFrameworkCore.dll
 C:\Users\Inovi\Desktop\InoviServices\Microsoft.EntityFrameworkCore.Abstractions.dll
@@ -26,6 +28,7 @@ C:\Users\Inovi\Desktop\InoviServices\System.Configuration.ConfigurationManager.d
 C:\Users\Inovi\Desktop\InoviServices\System.Diagnostics.DiagnosticSource.dll
 C:\Users\Inovi\Desktop\InoviServices\System.Drawing.Common.dll
 C:\Users\Inovi\Desktop\InoviServices\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Inovi\Desktop\InoviServices\System.IO.Pipelines.dll
 C:\Users\Inovi\Desktop\InoviServices\System.Runtime.Caching.dll
 C:\Users\Inovi\Desktop\InoviServices\System.Security.Cryptography.ProtectedData.dll
 C:\Users\Inovi\Desktop\InoviServices\System.Security.Permissions.dll

@@ -26,6 +26,8 @@ namespace DTO.DTO
         public string Username { get; set; }
         public string UserEmail { get; set; }
         public string UserPassword { get; set; }
+        public int RoleID { get;} = 3;
+        public bool IsActive { get;} = true;
     }
 
     public class UpdateUserPasswordDTO
@@ -73,8 +75,9 @@ namespace DTO.DTO
     public class ProfilePicDTO
     {
         public int ProfileId { get; set; }
-        public string FileName { get; set; }
-        public string ProfileLink { get; set; }
+        public int UserId { get; set; }
         public string Path { get; set; }
+        public string ProfileLink { get; set; }
+        public bool IsActive { get; } = true;
     }
 }

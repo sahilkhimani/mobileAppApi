@@ -7,6 +7,7 @@ namespace InoviDataAccessLayer.EntityModel
     {
         public TblUser()
         {
+            TblProfiles = new HashSet<TblProfile>();
             TblQueries = new HashSet<TblQuery>();
         }
 
@@ -22,7 +23,8 @@ namespace InoviDataAccessLayer.EntityModel
         public int? ModifiedBy { get; set; }
         public bool? IsActive { get; set; }
 
-        public virtual TblUserRole? UserRole { get; set; }
+        public virtual TblRole? UserRole { get; set; }
+        public virtual ICollection<TblProfile> TblProfiles { get; set; }
         public virtual ICollection<TblQuery> TblQueries { get; set; }
     }
 }

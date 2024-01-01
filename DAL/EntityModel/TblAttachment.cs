@@ -13,7 +13,6 @@ namespace InoviDataAccessLayer.EntityModel
         public int AttachmentLinkId { get; set; }
         public string? Path { get; set; }
         public string? AttachmentLink { get; set; }
-        public string? Filename { get; set; }
         public bool? IsActive { get; set; }
         public DateTime? CreatedOn { get; set; }
         public int? CreatedById { get; set; }

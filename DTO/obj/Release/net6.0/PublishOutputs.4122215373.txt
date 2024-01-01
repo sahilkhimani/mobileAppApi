@@ -1,3 +1,6 @@
 C:\Users\Inovi\Desktop\InvoiDataTransferObject\InoviDataTransferObject.dll
 C:\Users\Inovi\Desktop\InvoiDataTransferObject\InoviDataTransferObject.deps.json
 C:\Users\Inovi\Desktop\InvoiDataTransferObject\InoviDataTransferObject.pdb
+C:\Users\Inovi\Desktop\InvoiDataTransferObject\Microsoft.AspNetCore.Http.Features.dll
+C:\Users\Inovi\Desktop\InvoiDataTransferObject\Microsoft.Extensions.Primitives.dll
+C:\Users\Inovi\Desktop\InvoiDataTransferObject\System.IO.Pipelines.dll
