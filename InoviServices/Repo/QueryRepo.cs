@@ -41,7 +41,7 @@ namespace InoviServices.Repo
                     }).ToList()
                 };
 
-                 var result =_context.TblQueries.Add(tblreq).Entity;
+                var result = _context.TblQueries.Add(tblreq).Entity;
                 _context.SaveChanges();
                 _context.TblQueryStatuses.Add(new TblQueryStatus
                 {
@@ -79,10 +79,10 @@ namespace InoviServices.Repo
                         Description = s.Description,
                         CurrentStatus = s.CurrentStatus,
                         Remarks = s.Remarks,
-                        AttachmentPaths = _context.TblQueries.Include(x => x.TblQueryAttachments)
+                        Attachmentbytes = _context.TblQueries.Include(x => x.TblQueryAttachments)
                             .Where(x => x.IsActive == true && x.UserId == req.UserID)
                             .Select(x => x.TblQueryAttachments
-                                .Select(qa => qa.AttachmentLink.Path)
+                                .Select(qa => qa.AttachmentLink.Filebytes)
                                 .ToList()).FirstOrDefault()
                     }).ToList();
                 }
@@ -99,9 +99,9 @@ namespace InoviServices.Repo
                         Description = s.Description,
                         CurrentStatus = s.CurrentStatus,
                         Remarks = s.Remarks,
-                        AttachmentPaths = _context.TblQueryAttachments
+                        Attachmentbytes = _context.TblQueryAttachments
                             .Where(qa => qa.QueryId == s.QueryId)
-                            .Select(qa => qa.AttachmentLink.Path)
+                            .Select(qa => qa.AttachmentLink.Filebytes)
                             .ToList()
                     }).ToList();
                 }
@@ -128,9 +128,10 @@ namespace InoviServices.Repo
                 query.RemarksBy = req.UserID;
                 query.RemarksOn = DateTime.Now;
                 _context.TblQueries.Update(query);
-                _context.TblQueryStatuses.Add(new TblQueryStatus { 
+                _context.TblQueryStatuses.Add(new TblQueryStatus
+                {
                     QueryId = req.QueryID,
-                    StatusId= (int)req.StatusID,
+                    StatusId = (int)req.StatusID,
                     IsActive = true,
                     CreatedBy = req.UserID,
                     CreatedOn = DateTime.Now
@@ -158,8 +159,8 @@ namespace InoviServices.Repo
                 {
                     TblAttachment tblReq = new TblAttachment
                     {
-                        Path = req.Path,
                         AttachmentLink = req.AttachmentLink,
+                        Filebytes = req.Filebytes,
                         IsActive = req.IsActive,
                         CreatedOn = DateTime.Now,
                         CreatedById = req.UserID

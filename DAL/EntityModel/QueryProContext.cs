@@ -52,6 +52,8 @@ namespace InoviDataAccessLayer.EntityModel
                     .HasColumnType("datetime")
                     .HasColumnName("created_on");
 
+                entity.Property(e => e.Filebytes).HasColumnName("filebytes");
+
                 entity.Property(e => e.IsActive).HasColumnName("is_active");
 
                 entity.Property(e => e.ModifiedById).HasColumnName("modified_by_id");
@@ -88,6 +90,8 @@ namespace InoviDataAccessLayer.EntityModel
                 entity.Property(e => e.ProfileLink).HasColumnName("profile_link");
 
                 entity.Property(e => e.ProfilePath).HasColumnName("profile_path");
+
+                entity.Property(e => e.Profilebyte).HasColumnName("profilebyte");
 
                 entity.Property(e => e.UserId).HasColumnName("user_id");
 
@@ -170,7 +174,7 @@ namespace InoviDataAccessLayer.EntityModel
                 entity.HasOne(d => d.AttachmentLink)
                     .WithMany(p => p.TblQueryAttachments)
                     .HasForeignKey(d => d.AttachmentLinkId)
-                    .HasConstraintName("FK_tblQueryAttachment_tblAttachment");
+                    .HasConstraintName("FK_tblQueryAttachment_tblAttachment1");
 
                 entity.HasOne(d => d.Query)
                     .WithMany(p => p.TblQueryAttachments)

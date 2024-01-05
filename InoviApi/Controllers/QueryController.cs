@@ -135,7 +135,6 @@ namespace InoviWebApi.Controllers
                         {
                             FileName = "yourfilename.ext", // Provide the original filename here
                             AttachmentLink = attachmentLink,
-                            Path = filePath
                         };
 
                         uploadedFiles.Add(uploadedFile);
@@ -173,27 +172,26 @@ namespace InoviWebApi.Controllers
                     // Decode the Base64 string to byte array
                     byte[] fileBytes = Convert.FromBase64String(base64String);
 
-                    // Process each file, generate attachment link ID
                     var attachmentLink = Guid.NewGuid().ToString() + ".png";
-                    string path = _configuration["filepath"];
-                    bool exists = System.IO.Directory.Exists(path);
+                    //string path = _configuration["filepath"];
+                    //bool exists = System.IO.Directory.Exists(path);
 
-                    if (!exists)
-                        System.IO.Directory.CreateDirectory(path);
-                    var filePath = _configuration["filepath"] + "\\" + attachmentLink;
+                    //if (!exists)
+                    //    System.IO.Directory.CreateDirectory(path);
+                    //var filePath = _configuration["filepath"] + "\\" + attachmentLink;
 
-                    using (var stream = new FileStream(filePath, FileMode.OpenOrCreate))
-                    {
-                        // Write the byte array to the file using FileStream
-                        await stream.WriteAsync(fileBytes, 0, fileBytes.Length);
-                    }
+                    //using (var stream = new FileStream(filePath, FileMode.OpenOrCreate))
+                    //{
+                    //    // Write the byte array to the file using FileStream
+                    //    await stream.WriteAsync(fileBytes, 0, fileBytes.Length);
+                    //}
 
                     // Create model for the uploaded file
                     var uploadedFile = new AttachmentLinkList
                     {
                         AttachmentLink = attachmentLink,
-                        Path = filePath,
                         UserID = userid,
+                        Filebytes = fileBytes
                     };
 
                     uploadedFile = await _reposWrapper.QueryRepo.UploadImage(uploadedFile);

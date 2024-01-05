@@ -14,6 +14,7 @@ namespace InoviDataAccessLayer.EntityModel
         public int? CreatedBy { get; set; }
         public DateTime? ModifiedOn { get; set; }
         public int? ModifiedBy { get; set; }
+        public byte[]? Profilebyte { get; set; }
 
         public virtual TblUser? User { get; set; }
     }

@@ -17,7 +17,7 @@ namespace InoviDataTransferObject.DTO
         public string Remarks { get; set; }
 
         //public string AttachmentPaths { get; set; }
-        public List<string> AttachmentPaths { get; set; }
+        public List<byte[]> Attachmentbytes { get; set; }
     }
 
     public class AddQueryDTO
@@ -34,12 +34,12 @@ namespace InoviDataTransferObject.DTO
         public int AttachmentLinkId { get; set; }
         public string FileName { get; set; }
         public string AttachmentLink { get; set; }
-        public string Path { get; set; }
+        public byte[] Filebytes { get; set; }
         public bool IsActive { get; } = true;
         public int UserID { get; set; }
 
     }
-   public class GetUserIDAndRoleID
+    public class GetUserIDAndRoleID
     {
         public int UserID { get; set; }
         public int RoleID { get; set; }
