@@ -2013,23 +2013,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Inovi\\.nuget\\packages\\": {},
+    "C:\\Users\\Sahil\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\AppAPI\\DAL\\InoviDataAccessLayer.csproj",
+      "projectUniqueName": "D:\\Mobile App\\Mobile Api\\mobileAppApi\\DAL\\InoviDataAccessLayer.csproj",
       "projectName": "InoviDataAccessLayer",
-      "projectPath": "D:\\AppAPI\\DAL\\InoviDataAccessLayer.csproj",
-      "packagesPath": "C:\\Users\\Inovi\\.nuget\\packages\\",
-      "outputPath": "D:\\AppAPI\\DAL\\obj\\",
+      "projectPath": "D:\\Mobile App\\Mobile Api\\mobileAppApi\\DAL\\InoviDataAccessLayer.csproj",
+      "packagesPath": "C:\\Users\\Sahil\\.nuget\\packages\\",
+      "outputPath": "D:\\Mobile App\\Mobile Api\\mobileAppApi\\DAL\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Inovi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Sahil\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -2090,7 +2090,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

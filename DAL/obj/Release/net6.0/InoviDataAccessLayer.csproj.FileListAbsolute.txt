@@ -26,3 +26,18 @@ D:\AppAPI\DAL\obj\Release\net6.0\refint\InoviDataAccessLayer.dll
 D:\AppAPI\DAL\obj\Release\net6.0\InoviDataAccessLayer.pdb
 D:\AppAPI\DAL\obj\Release\net6.0\InoviDataAccessLayer.genruntimeconfig.cache
 D:\AppAPI\DAL\obj\Release\net6.0\ref\InoviDataAccessLayer.dll
+D:\Mobile App\Mobile Api\mobileAppApi\DAL\bin\Release\net6.0\InoviDataAccessLayer.deps.json
+D:\Mobile App\Mobile Api\mobileAppApi\DAL\bin\Release\net6.0\InoviDataAccessLayer.runtimeconfig.json
+D:\Mobile App\Mobile Api\mobileAppApi\DAL\bin\Release\net6.0\InoviDataAccessLayer.dll
+D:\Mobile App\Mobile Api\mobileAppApi\DAL\bin\Release\net6.0\InoviDataAccessLayer.pdb
+D:\Mobile App\Mobile Api\mobileAppApi\DAL\obj\Release\net6.0\InoviDataAccessLayer.csproj.AssemblyReference.cache
+D:\Mobile App\Mobile Api\mobileAppApi\DAL\obj\Release\net6.0\InoviDataAccessLayer.GeneratedMSBuildEditorConfig.editorconfig
+D:\Mobile App\Mobile Api\mobileAppApi\DAL\obj\Release\net6.0\InoviDataAccessLayer.AssemblyInfoInputs.cache
+D:\Mobile App\Mobile Api\mobileAppApi\DAL\obj\Release\net6.0\InoviDataAccessLayer.AssemblyInfo.cs
+D:\Mobile App\Mobile Api\mobileAppApi\DAL\obj\Release\net6.0\InoviDataAccessLayer.csproj.CoreCompileInputs.cache
+D:\Mobile App\Mobile Api\mobileAppApi\DAL\obj\Release\net6.0\InoviDataAccessLayer.sourcelink.json
+D:\Mobile App\Mobile Api\mobileAppApi\DAL\obj\Release\net6.0\InoviDataAccessLayer.dll
+D:\Mobile App\Mobile Api\mobileAppApi\DAL\obj\Release\net6.0\refint\InoviDataAccessLayer.dll
+D:\Mobile App\Mobile Api\mobileAppApi\DAL\obj\Release\net6.0\InoviDataAccessLayer.pdb
+D:\Mobile App\Mobile Api\mobileAppApi\DAL\obj\Release\net6.0\InoviDataAccessLayer.genruntimeconfig.cache
+D:\Mobile App\Mobile Api\mobileAppApi\DAL\obj\Release\net6.0\ref\InoviDataAccessLayer.dll

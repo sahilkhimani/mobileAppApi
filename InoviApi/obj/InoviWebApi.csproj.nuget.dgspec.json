@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\AppAPI\\InoviApi\\InoviWebApi.csproj": {}
+    "D:\\Mobile App\\Mobile Api\\mobileAppApi\\InoviApi\\InoviWebApi.csproj": {}
   },
   "projects": {
-    "D:\\AppAPI\\DAL\\InoviDataAccessLayer.csproj": {
+    "D:\\Mobile App\\Mobile Api\\mobileAppApi\\DAL\\InoviDataAccessLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\AppAPI\\DAL\\InoviDataAccessLayer.csproj",
+        "projectUniqueName": "D:\\Mobile App\\Mobile Api\\mobileAppApi\\DAL\\InoviDataAccessLayer.csproj",
         "projectName": "InoviDataAccessLayer",
-        "projectPath": "D:\\AppAPI\\DAL\\InoviDataAccessLayer.csproj",
-        "packagesPath": "C:\\Users\\Inovi\\.nuget\\packages\\",
-        "outputPath": "D:\\AppAPI\\DAL\\obj\\",
+        "projectPath": "D:\\Mobile App\\Mobile Api\\mobileAppApi\\DAL\\InoviDataAccessLayer.csproj",
+        "packagesPath": "C:\\Users\\Sahil\\.nuget\\packages\\",
+        "outputPath": "D:\\Mobile App\\Mobile Api\\mobileAppApi\\DAL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Inovi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Sahil\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -78,24 +78,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\AppAPI\\DTO\\InoviDataTransferObject.csproj": {
+    "D:\\Mobile App\\Mobile Api\\mobileAppApi\\DTO\\InoviDataTransferObject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\AppAPI\\DTO\\InoviDataTransferObject.csproj",
+        "projectUniqueName": "D:\\Mobile App\\Mobile Api\\mobileAppApi\\DTO\\InoviDataTransferObject.csproj",
         "projectName": "InoviDataTransferObject",
-        "projectPath": "D:\\AppAPI\\DTO\\InoviDataTransferObject.csproj",
-        "packagesPath": "C:\\Users\\Inovi\\.nuget\\packages\\",
-        "outputPath": "D:\\AppAPI\\DTO\\obj\\",
+        "projectPath": "D:\\Mobile App\\Mobile Api\\mobileAppApi\\DTO\\InoviDataTransferObject.csproj",
+        "packagesPath": "C:\\Users\\Sahil\\.nuget\\packages\\",
+        "outputPath": "D:\\Mobile App\\Mobile Api\\mobileAppApi\\DTO\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Inovi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Sahil\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -144,24 +144,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\AppAPI\\InoviApi\\InoviWebApi.csproj": {
+    "D:\\Mobile App\\Mobile Api\\mobileAppApi\\InoviApi\\InoviWebApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\AppAPI\\InoviApi\\InoviWebApi.csproj",
+        "projectUniqueName": "D:\\Mobile App\\Mobile Api\\mobileAppApi\\InoviApi\\InoviWebApi.csproj",
         "projectName": "InoviWebApi",
-        "projectPath": "D:\\AppAPI\\InoviApi\\InoviWebApi.csproj",
-        "packagesPath": "C:\\Users\\Inovi\\.nuget\\packages\\",
-        "outputPath": "D:\\AppAPI\\InoviApi\\obj\\",
+        "projectPath": "D:\\Mobile App\\Mobile Api\\mobileAppApi\\InoviApi\\InoviWebApi.csproj",
+        "packagesPath": "C:\\Users\\Sahil\\.nuget\\packages\\",
+        "outputPath": "D:\\Mobile App\\Mobile Api\\mobileAppApi\\InoviApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Inovi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Sahil\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -177,14 +177,14 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\AppAPI\\DAL\\InoviDataAccessLayer.csproj": {
-                "projectPath": "D:\\AppAPI\\DAL\\InoviDataAccessLayer.csproj"
+              "D:\\Mobile App\\Mobile Api\\mobileAppApi\\DAL\\InoviDataAccessLayer.csproj": {
+                "projectPath": "D:\\Mobile App\\Mobile Api\\mobileAppApi\\DAL\\InoviDataAccessLayer.csproj"
               },
-              "D:\\AppAPI\\DTO\\InoviDataTransferObject.csproj": {
-                "projectPath": "D:\\AppAPI\\DTO\\InoviDataTransferObject.csproj"
+              "D:\\Mobile App\\Mobile Api\\mobileAppApi\\DTO\\InoviDataTransferObject.csproj": {
+                "projectPath": "D:\\Mobile App\\Mobile Api\\mobileAppApi\\DTO\\InoviDataTransferObject.csproj"
               },
-              "D:\\AppAPI\\InoviServices\\InoviServices.csproj": {
-                "projectPath": "D:\\AppAPI\\InoviServices\\InoviServices.csproj"
+              "D:\\Mobile App\\Mobile Api\\mobileAppApi\\InoviServices\\InoviServices.csproj": {
+                "projectPath": "D:\\Mobile App\\Mobile Api\\mobileAppApi\\InoviServices\\InoviServices.csproj"
               }
             }
           }
@@ -235,24 +235,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\AppAPI\\InoviServices\\InoviServices.csproj": {
+    "D:\\Mobile App\\Mobile Api\\mobileAppApi\\InoviServices\\InoviServices.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\AppAPI\\InoviServices\\InoviServices.csproj",
+        "projectUniqueName": "D:\\Mobile App\\Mobile Api\\mobileAppApi\\InoviServices\\InoviServices.csproj",
         "projectName": "InoviServices",
-        "projectPath": "D:\\AppAPI\\InoviServices\\InoviServices.csproj",
-        "packagesPath": "C:\\Users\\Inovi\\.nuget\\packages\\",
-        "outputPath": "D:\\AppAPI\\InoviServices\\obj\\",
+        "projectPath": "D:\\Mobile App\\Mobile Api\\mobileAppApi\\InoviServices\\InoviServices.csproj",
+        "packagesPath": "C:\\Users\\Sahil\\.nuget\\packages\\",
+        "outputPath": "D:\\Mobile App\\Mobile Api\\mobileAppApi\\InoviServices\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Inovi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Sahil\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -268,11 +268,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\AppAPI\\DAL\\InoviDataAccessLayer.csproj": {
-                "projectPath": "D:\\AppAPI\\DAL\\InoviDataAccessLayer.csproj"
+              "D:\\Mobile App\\Mobile Api\\mobileAppApi\\DAL\\InoviDataAccessLayer.csproj": {
+                "projectPath": "D:\\Mobile App\\Mobile Api\\mobileAppApi\\DAL\\InoviDataAccessLayer.csproj"
               },
-              "D:\\AppAPI\\DTO\\InoviDataTransferObject.csproj": {
-                "projectPath": "D:\\AppAPI\\DTO\\InoviDataTransferObject.csproj"
+              "D:\\Mobile App\\Mobile Api\\mobileAppApi\\DTO\\InoviDataTransferObject.csproj": {
+                "projectPath": "D:\\Mobile App\\Mobile Api\\mobileAppApi\\DTO\\InoviDataTransferObject.csproj"
               }
             }
           }
@@ -312,7 +312,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

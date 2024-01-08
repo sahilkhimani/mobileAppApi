@@ -32,3 +32,21 @@ D:\AppAPI\InoviServices\obj\Release\net6.0\InoviServices.dll
 D:\AppAPI\InoviServices\obj\Release\net6.0\refint\InoviServices.dll
 D:\AppAPI\InoviServices\obj\Release\net6.0\InoviServices.pdb
 D:\AppAPI\InoviServices\obj\Release\net6.0\ref\InoviServices.dll
+D:\Mobile App\Mobile Api\mobileAppApi\InoviServices\bin\Release\net6.0\InoviServices.deps.json
+D:\Mobile App\Mobile Api\mobileAppApi\InoviServices\bin\Release\net6.0\InoviServices.dll
+D:\Mobile App\Mobile Api\mobileAppApi\InoviServices\bin\Release\net6.0\InoviServices.pdb
+D:\Mobile App\Mobile Api\mobileAppApi\InoviServices\bin\Release\net6.0\InoviDataAccessLayer.dll
+D:\Mobile App\Mobile Api\mobileAppApi\InoviServices\bin\Release\net6.0\InoviDataTransferObject.dll
+D:\Mobile App\Mobile Api\mobileAppApi\InoviServices\bin\Release\net6.0\InoviDataAccessLayer.pdb
+D:\Mobile App\Mobile Api\mobileAppApi\InoviServices\bin\Release\net6.0\InoviDataTransferObject.pdb
+D:\Mobile App\Mobile Api\mobileAppApi\InoviServices\obj\Release\net6.0\InoviServices.csproj.AssemblyReference.cache
+D:\Mobile App\Mobile Api\mobileAppApi\InoviServices\obj\Release\net6.0\InoviServices.GeneratedMSBuildEditorConfig.editorconfig
+D:\Mobile App\Mobile Api\mobileAppApi\InoviServices\obj\Release\net6.0\InoviServices.AssemblyInfoInputs.cache
+D:\Mobile App\Mobile Api\mobileAppApi\InoviServices\obj\Release\net6.0\InoviServices.AssemblyInfo.cs
+D:\Mobile App\Mobile Api\mobileAppApi\InoviServices\obj\Release\net6.0\InoviServices.csproj.CoreCompileInputs.cache
+D:\Mobile App\Mobile Api\mobileAppApi\InoviServices\obj\Release\net6.0\InoviServices.sourcelink.json
+D:\Mobile App\Mobile Api\mobileAppApi\InoviServices\obj\Release\net6.0\InoviServices.csproj.CopyComplete
+D:\Mobile App\Mobile Api\mobileAppApi\InoviServices\obj\Release\net6.0\InoviServices.dll
+D:\Mobile App\Mobile Api\mobileAppApi\InoviServices\obj\Release\net6.0\refint\InoviServices.dll
+D:\Mobile App\Mobile Api\mobileAppApi\InoviServices\obj\Release\net6.0\InoviServices.pdb
+D:\Mobile App\Mobile Api\mobileAppApi\InoviServices\obj\Release\net6.0\ref\InoviServices.dll

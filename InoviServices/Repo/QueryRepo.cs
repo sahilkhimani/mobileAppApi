@@ -79,11 +79,10 @@ namespace InoviServices.Repo
                         Description = s.Description,
                         CurrentStatus = s.CurrentStatus,
                         Remarks = s.Remarks,
-                        Attachmentbytes = _context.TblQueries.Include(x => x.TblQueryAttachments)
-                            .Where(x => x.IsActive == true && x.UserId == req.UserID)
-                            .Select(x => x.TblQueryAttachments
-                                .Select(qa => qa.AttachmentLink.Filebytes)
-                                .ToList()).FirstOrDefault()
+                        Attachmentbytes = _context.TblQueryAttachments
+                            .Where(qa => qa.QueryId == s.QueryId)
+                            .Select(qa => qa.AttachmentLink.Filebytes)
+                            .ToList()
                     }).ToList();
                 }
                 else
@@ -223,3 +222,4 @@ namespace InoviServices.Repo
         //}
     }
 }
+

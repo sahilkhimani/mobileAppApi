@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("InoviServices")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e1290bb7293a1d072a5b2f9159a174afeeed5a7e")]
 [assembly: System.Reflection.AssemblyProductAttribute("InoviServices")]
 [assembly: System.Reflection.AssemblyTitleAttribute("InoviServices")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
